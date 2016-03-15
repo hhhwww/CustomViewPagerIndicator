@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#ffffffff">
+    android:background="#ffffffff"
+    android:orientation="vertical">
 
     <com.xd.customviewpagerindicator.view.CustomVI
         android:id="@+id/custom_vi"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@drawable/title_bar_bg_one_row"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:visible_tab_count="4">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="短信"
+            android:text="短信1"
             android:textColor="#ccffffff"
             android:textSize="18sp" />
 
@@ -27,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="收藏"
+            android:text="收藏1"
             android:textColor="#ccffffff"
             android:textSize="18sp" />
 
@@ -36,7 +38,61 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="推荐"
+            android:text="推荐1"
+            android:textColor="#ccffffff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="短信2"
+            android:textColor="#ccffffff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="收藏2"
+            android:textColor="#ccffffff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="推荐2"
+            android:textColor="#ccffffff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="短信3"
+            android:textColor="#ccffffff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="收藏3"
+            android:textColor="#ccffffff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="推荐3"
             android:textColor="#ccffffff"
             android:textSize="18sp" />
 

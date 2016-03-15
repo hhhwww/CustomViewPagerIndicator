@@ -17,7 +17,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private CustomVI mCustomVI;
-    private List<String> mDatas = Arrays.asList("短信", "收藏", "推荐");
+    private List<String> mDatas = Arrays.asList("短信1", "收藏1", "推荐1",
+            "短信2", "收藏2", "推荐2","短信3", "收藏3", "推荐3");
 
     private ViewPager mViewPager;
     private FragmentPagerAdapter mAdapter;
