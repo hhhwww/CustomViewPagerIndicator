@@ -10,11 +10,17 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.xd.customviewpagerindicator.R;
+
+import java.util.List;
 
 /**
  * Created by hhhhwei on 16/3/15.
@@ -141,5 +147,35 @@ public class CustomVI extends LinearLayout {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.widthPixels;
+    }
+
+    //向外界提供的方法 用于动态的设置tab的数量
+    public void setTabCounts(int count) {
+        this.count = count;
+    }
+
+    //向外界提供的方法 用于动态设置tab
+    public void setItemTabs(List<String> titles) {
+        if (titles != null && titles.size() > 0) {
+            //先移除所有布局文件中的views
+            this.removeAllViews();
+            for (String title : titles)
+                addView(generateTextView(title));
+        }
+    }
+
+    private static final int COLOR_NORMAL_TEXT = 0x77FFFFFF;
+
+    private View generateTextView(String title) {
+        TextView textView = new TextView(getContext());
+        textView.setText(title);
+        textView.setGravity(Gravity.CENTER);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        textView.setTextColor(COLOR_NORMAL_TEXT);
+        LinearLayout.LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        layoutParams.width = getScreenWidth() / count;
+        textView.setLayoutParams(layoutParams);
+        return textView;
     }
 }

@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private CustomVI mCustomVI;
     private List<String> mDatas = Arrays.asList("短信1", "收藏1", "推荐1",
-            "短信2", "收藏2", "推荐2","短信3", "收藏3", "推荐3");
+            "短信2", "收藏2", "推荐2", "短信3", "收藏3", "推荐3");
 
     private ViewPager mViewPager;
     private FragmentPagerAdapter mAdapter;
@@ -58,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        //用户自定义tab
+        mCustomVI.setTabCounts(3);
+        mCustomVI.setItemTabs(mDatas);
+
         mViewPager.setAdapter(mAdapter);
     }
 
@@ -66,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 //偏移量为position * width + positionOffset * width
-                mCustomVI.scroll(position,positionOffset);
+                mCustomVI.scroll(position, positionOffset);
             }
 
             @Override
