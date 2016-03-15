@@ -168,6 +168,7 @@ public class CustomVI extends LinearLayout {
     }
 
     private static final int COLOR_NORMAL_TEXT = 0x77FFFFFF;
+    private static final int COLOR_LIGHT_TEXT = 0xFFFFFFFF;
 
     private View generateTextView(String title) {
         TextView textView = new TextView(getContext());
@@ -198,6 +199,7 @@ public class CustomVI extends LinearLayout {
 
             @Override
             public void onPageSelected(int position) {
+                setTextLight(position);
                 if (myOnPagerChangeListener != null)
                     myOnPagerChangeListener.onPageSelected(position);
             }
@@ -209,6 +211,7 @@ public class CustomVI extends LinearLayout {
             }
         });
         mViewPager.setCurrentItem(pos);
+        setTextLight(pos);
     }
 
     //自己处理了这个监听滚动的逻辑，所以需要向用户提供一个接口，让用户也可以用上监听方法
@@ -225,5 +228,23 @@ public class CustomVI extends LinearLayout {
 
     public void setMyOnPagerChangeListener(MyOnPagerChangeListener myOnPagerChangeListener) {
         this.myOnPagerChangeListener = myOnPagerChangeListener;
+    }
+
+    //进行文字的高亮
+    public void setTextLight(int pos) {
+        resetColor();
+        View view = getChildAt(pos);
+        if (view instanceof TextView)
+            ((TextView) view).setTextColor(COLOR_LIGHT_TEXT);
+    }
+
+    //在进行高亮前先进行重制颜色
+    public void resetColor() {
+        for (int i = 0; i < getChildCount(); i++) {
+            View child = getChildAt(i);
+            if (child instanceof TextView) {
+                ((TextView) child).setTextColor(COLOR_NORMAL_TEXT);
+            }
+        }
     }
 }
