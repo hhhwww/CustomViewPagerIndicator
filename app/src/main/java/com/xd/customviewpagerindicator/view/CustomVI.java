@@ -92,6 +92,14 @@ public class CustomVI extends LinearLayout {
         int tabWidth = getWidth() / count;
         Log.e("fuck", "getWidth()" + getWidth());
         mMoveTranslationX = (int) (position * tabWidth + positionOffset * tabWidth);
+
+        //处理容器移动出当前屏幕的逻辑
+        if (position >= count - 2 && positionOffset > 0 && getChildCount() > count) {
+            if()
+            int moveDistance = (int) ((position - (count - 2)) * tabWidth + positionOffset * tabWidth);
+            this.scrollTo(moveDistance, 0);
+        }
+
         invalidate();
     }
 
