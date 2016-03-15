@@ -73,4 +73,10 @@ public class CustomVI extends LinearLayout {
         canvas.restore();
 
     }
+
+    public void scroll(int position, float positionOffset) {
+        int tabWidth = getWidth() / 3;
+        mMoveTranslationX = (int) (position * tabWidth + positionOffset * tabWidth);
+        invalidate();
+    }
 }

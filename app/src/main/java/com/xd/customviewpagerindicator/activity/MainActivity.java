@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
         initDatas();
+        initListeners();
     }
 
     private void initViews() {
@@ -57,5 +58,25 @@ public class MainActivity extends AppCompatActivity {
         };
 
         mViewPager.setAdapter(mAdapter);
+    }
+
+    private void initListeners() {
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //偏移量为position * width + positionOffset * width
+                mCustomVI.scroll(position,positionOffset);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 }
