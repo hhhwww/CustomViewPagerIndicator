@@ -13,7 +13,7 @@
         android:layout_height="45dp"
         android:background="@drawable/title_bar_bg_one_row"
         android:orientation="horizontal"
-        app:visible_tab_count="4">
+        app:visible_tab_count="1">
 
         <TextView
             android:layout_width="0dp"

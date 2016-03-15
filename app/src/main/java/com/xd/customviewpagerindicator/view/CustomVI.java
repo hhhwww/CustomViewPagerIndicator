@@ -60,10 +60,16 @@ public class CustomVI extends LinearLayout {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        mTriangleWidth = (int) ((w / count) * RADIO_TRIANGLE_WIDTH);
-        //默认角度为45度
-        mTriangleHeight = mTriangleWidth / 2;
-        mInitTranslationX = w / count / 2 - mTriangleWidth / 2;
+        if (count != 1) {
+            mTriangleWidth = (int) ((w / count) * RADIO_TRIANGLE_WIDTH);
+            //默认角度为45度
+            mTriangleHeight = mTriangleWidth / 2;
+            mInitTranslationX = w / count / 2 - mTriangleWidth / 2;
+        } else {
+            mTriangleWidth = (int) ((w / 3) * RADIO_TRIANGLE_WIDTH);
+            mTriangleHeight = mTriangleWidth / 2;
+            mInitTranslationX = w / count / 2 - mTriangleWidth / 2;
+        }
 
         initTriangle();
     }
@@ -95,9 +101,13 @@ public class CustomVI extends LinearLayout {
 
         //处理容器移动出当前屏幕的逻辑
         if (position >= count - 2 && positionOffset > 0 && getChildCount() > count) {
-            if()
-            int moveDistance = (int) ((position - (count - 2)) * tabWidth + positionOffset * tabWidth);
-            this.scrollTo(moveDistance, 0);
+            if (count != 1) {
+                int moveDistance = (int) ((position - (count - 2)) * tabWidth + positionOffset * tabWidth);
+                this.scrollTo(moveDistance, 0);
+            } else {
+                int moveDistance = (int) (position * tabWidth + tabWidth * positionOffset);
+                this.scrollTo(moveDistance, 0);
+            }
         }
 
         invalidate();
