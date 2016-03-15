@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         mCustomVI.setItemTabs(mDatas);
 
         mViewPager.setAdapter(mAdapter);
-        mCustomVI.setViewPager(mViewPager);
+        mCustomVI.setViewPager(mViewPager, 0);
     }
+
 }

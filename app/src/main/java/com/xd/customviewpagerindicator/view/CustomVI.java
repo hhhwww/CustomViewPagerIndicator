@@ -185,24 +185,45 @@ public class CustomVI extends LinearLayout {
     private ViewPager mViewPager;
 
     //把处理代码的逻辑封装到自定义View中
-    public void setViewPager(ViewPager viewPager) {
+    public void setViewPager(ViewPager viewPager, int pos) {
         mViewPager = viewPager;
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 //偏移量为position * width + positionOffset * width
                 scroll(position, positionOffset);
+                if (myOnPagerChangeListener != null)
+                    myOnPagerChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
             }
 
             @Override
             public void onPageSelected(int position) {
-
+                if (myOnPagerChangeListener != null)
+                    myOnPagerChangeListener.onPageSelected(position);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                if (myOnPagerChangeListener != null)
+                    myOnPagerChangeListener.onPageScrollStateChanged(state);
             }
         });
+        mViewPager.setCurrentItem(pos);
+    }
+
+    //自己处理了这个监听滚动的逻辑，所以需要向用户提供一个接口，让用户也可以用上监听方法
+    //在自定义view时，自己处理逻辑时占用了某个接口，一定要自定义一个接口，把原来的回调提供给用户
+    public interface MyOnPagerChangeListener {
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);
+
+        public void onPageSelected(int position);
+
+        public void onPageScrollStateChanged(int state);
+    }
+
+    private MyOnPagerChangeListener myOnPagerChangeListener;
+
+    public void setMyOnPagerChangeListener(MyOnPagerChangeListener myOnPagerChangeListener) {
+        this.myOnPagerChangeListener = myOnPagerChangeListener;
     }
 }
