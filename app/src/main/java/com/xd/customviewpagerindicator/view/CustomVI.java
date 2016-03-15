@@ -140,6 +140,7 @@ public class CustomVI extends LinearLayout {
             Log.e("fuck", "getScreenWidth()" + getScreenWidth());
             view.setLayoutParams(layoutParams);
         }
+        setTabClick();
     }
 
     //得到屏幕的绝对宽度
@@ -212,6 +213,7 @@ public class CustomVI extends LinearLayout {
         });
         mViewPager.setCurrentItem(pos);
         setTextLight(pos);
+        setTabClick();
     }
 
     //自己处理了这个监听滚动的逻辑，所以需要向用户提供一个接口，让用户也可以用上监听方法
@@ -245,6 +247,20 @@ public class CustomVI extends LinearLayout {
             if (child instanceof TextView) {
                 ((TextView) child).setTextColor(COLOR_NORMAL_TEXT);
             }
+        }
+    }
+
+    //进行tab的点击事件
+    public void setTabClick() {
+        for (int i = 0; i < getChildCount(); i++) {
+            final int j = i;
+            View view = getChildAt(i);
+            view.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mViewPager.setCurrentItem(j);
+                }
+            });
         }
     }
 }
