@@ -35,11 +35,12 @@ public class CustomVI extends LinearLayout {
 
     //为了适应不同的屏幕
     private static final float RADIO_TRIANGLE_WIDTH = 1 / 6f;
-    private static final int DEFAULR_TAB_COUNT = 4;
+    private static final int DEFAULR_TAB_COUNT = 3;
 
     private int mInitTranslationX;
     private int mMoveTranslationX;
-    private int count;
+    //用户不设置的话，默认的是三个
+    private int count = DEFAULR_TAB_COUNT;
 
     public CustomVI(Context context) {
         this(context, null);
@@ -151,7 +152,8 @@ public class CustomVI extends LinearLayout {
 
     //向外界提供的方法 用于动态的设置tab的数量
     public void setTabCounts(int count) {
-        this.count = count;
+        if (count > 0)
+            this.count = count;
     }
 
     //向外界提供的方法 用于动态设置tab

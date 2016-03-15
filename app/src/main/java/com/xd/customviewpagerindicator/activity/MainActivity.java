@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         //用户自定义tab
-        mCustomVI.setTabCounts(3);
+        mCustomVI.setTabCounts(4);
         mCustomVI.setItemTabs(mDatas);
 
         mViewPager.setAdapter(mAdapter);
