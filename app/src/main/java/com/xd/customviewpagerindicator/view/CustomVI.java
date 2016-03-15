@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.CornerPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -179,5 +180,29 @@ public class CustomVI extends LinearLayout {
         layoutParams.width = getScreenWidth() / count;
         textView.setLayoutParams(layoutParams);
         return textView;
+    }
+
+    private ViewPager mViewPager;
+
+    //把处理代码的逻辑封装到自定义View中
+    public void setViewPager(ViewPager viewPager) {
+        mViewPager = viewPager;
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //偏移量为position * width + positionOffset * width
+                scroll(position, positionOffset);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 }
