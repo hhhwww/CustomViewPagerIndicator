@@ -53,9 +53,10 @@ public class CustomVI extends LinearLayout {
         mPaint = new Paint();
         mPaint.setColor(Color.parseColor("#ffffffff"));
         mPaint.setAntiAlias(true);
+        //实体，和内容区域颜色相同
         mPaint.setStyle(Paint.Style.FILL);
+        //圆角的效果
         mPaint.setPathEffect(new CornerPathEffect(3));
-        mPaint.setDither(true);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomVI);
         count = typedArray.getInt(R.styleable.CustomVI_visible_tab_count, DEFAULR_TAB_COUNT);
@@ -63,7 +64,7 @@ public class CustomVI extends LinearLayout {
         typedArray.recycle();
     }
 
-    //根据一些空间的宽高设置一些宽高时
+    //根据一些空间的宽高设置一些宽高时，当空间的宽高发生变化时就回调此方法。
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -91,7 +92,7 @@ public class CustomVI extends LinearLayout {
         mPath.close();
     }
 
-    //绘制自己的孩子
+    //都绘制自己的孩子,自己的方法肯定可以调用了
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
@@ -99,15 +100,15 @@ public class CustomVI extends LinearLayout {
         canvas.translate(mInitTranslationX + mMoveTranslationX, getHeight());
         canvas.drawPath(mPath, mPaint);
         canvas.restore();
-
     }
 
+    //监听事件的时候肯定能有getWidth了
     public void scroll(int position, float positionOffset) {
         int tabWidth = getWidth() / count;
         Log.e("fuck", "getWidth()" + getWidth());
         mMoveTranslationX = (int) (position * tabWidth + positionOffset * tabWidth);
 
-        //处理容器移动出当前屏幕的逻辑
+        //处理容器移动出当前屏幕的逻辑,并且考虑特殊情况 count = 1时
         if (position >= count - 2 && positionOffset > 0 && getChildCount() > count) {
             if (count != 1) {
                 int moveDistance = (int) ((position - (count - 2)) * tabWidth + positionOffset * tabWidth);
@@ -118,10 +119,10 @@ public class CustomVI extends LinearLayout {
             }
         }
 
-        invalidate();
+        invalidate();V
     }
 
-    //加载完xml后回调,设置子View的params
+    //加载完xml后回调,获取子View的个数，设置子View的params，在这个函数中不能使用getWidth,
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
@@ -137,7 +138,6 @@ public class CustomVI extends LinearLayout {
             //每个屏幕中显示三个控件，剩下的就被挤出去了
             //在这个函数里getWidth为0
             layoutParams.width = getScreenWidth() / count;
-            Log.e("fuck", "getScreenWidth()" + getScreenWidth());
             view.setLayoutParams(layoutParams);
         }
         setTabClick();
@@ -146,7 +146,6 @@ public class CustomVI extends LinearLayout {
     //得到屏幕的绝对宽度
     private int getScreenWidth() {
         WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay();
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.widthPixels;
@@ -171,6 +170,11 @@ public class CustomVI extends LinearLayout {
     private static final int COLOR_NORMAL_TEXT = 0x77FFFFFF;
     private static final int COLOR_LIGHT_TEXT = 0xFFFFFFFF;
 
+    /**
+     * 动态的设置宽度
+     * @param title
+     * @return
+     */
     private View generateTextView(String title) {
         TextView textView = new TextView(getContext());
         textView.setText(title);

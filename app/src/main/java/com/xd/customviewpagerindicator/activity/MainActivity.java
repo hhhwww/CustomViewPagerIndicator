@@ -57,11 +57,13 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        //用户自定义tab
+        //用户自定义一屏tab的数量
         mCustomVI.setTabCounts(4);
+        //用户自定义全部tab的Text和数量
         mCustomVI.setItemTabs(mDatas);
 
         mViewPager.setAdapter(mAdapter);
+        //把响应时间封装到CustomVI中
         mCustomVI.setViewPager(mViewPager, 0);
     }
 
